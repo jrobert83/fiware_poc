@@ -1,0 +1,247 @@
+StreetlightControlCabinetSPIE:
+  description: 'A Streetlight control cabinet SPIE'
+  properties:
+    id:
+      anyOf: &streetlightcontrolcabinet_-_properties_-_owner_-_items_-_anyof
+        - description: 'Property. Identifier format of any NGSI entity'
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
+          type: string
+        - description: 'Property. Identifier format of any NGSI entity'
+          format: uri
+          type: string
+      description: 'Unique identifier of the entity'
+      x-ngsi:
+        type: Property
+    type:
+      description: 'NGSI Entity type. It has to be StreetlightControlCabinet'
+      enum:
+        - StreetlightControlCabinetSPIE
+      type: string
+      x-ngsi:
+        type: Property
+    mID:
+      description: 'Internal ID'
+      minimum: 0
+      type: number
+      x-ngsi:
+        model: http://schema.org/Number
+        type: Property
+    mUniqueID:
+      description: 'Unique internal ID'
+      minimum: 0
+      type: number
+      x-ngsi:
+        model: http://schema.org/Number
+        type: Property
+    mNumMaintenance:
+      description: 'Numero de maintenance de l equipement'
+      type: string
+      x-ngsi:
+        type: Property
+    mPresenceAlarme:
+      description: 'Niveau de presence d une alarme'
+      minimum: 0
+      type: number
+      x-ngsi:
+        model: http://schema.org/Number
+        type: Property
+    mProtocole:
+      description: 'Numero de protocole'
+      minimum: 0
+      type: number
+      x-ngsi:
+        model: http://schema.org/Number
+        type: Property
+    mTypeBoitier:
+      description: 'Type de boitier'
+      type: string
+      x-ngsi:
+        type: Property
+    mVersionDossier:
+      description: 'Version de dossier carrefour'
+      type: string
+      x-ngsi:
+        type: Property
+    mHostName:
+      description: 'Nom de host'
+      type: string
+      x-ngsi:
+        type: Property
+    mNomFichierConfiguration:
+      description: 'Nom du fichier de configuration'
+      type: string
+      x-ngsi:
+        type: Property
+    propertiesVal[1]:
+      description: 'Property numero 1'
+      type: string
+      x-ngsi:
+        type: Property
+    propertiesVal[2]:
+      description: 'Property numero 2'
+      type: string
+      x-ngsi:
+        type: Property
+    location:
+      description: 'Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon'
+      oneOf:
+        - description: 'Geoproperty. Geojson reference to the item. Point'
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                type: number
+              minItems: 2
+              type: array
+            type:
+              enum:
+                - Point
+              type: string
+          required:
+            - type
+            - coordinates
+          title: 'GeoJSON Point'
+          type: object
+        - description: 'Geoproperty. Geojson reference to the item. LineString'
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                items:
+                  type: number
+                minItems: 2
+                type: array
+              minItems: 2
+              type: array
+            type:
+              enum:
+                - LineString
+              type: string
+          required:
+            - type
+            - coordinates
+          title: 'GeoJSON LineString'
+          type: object
+        - description: 'Geoproperty. Geojson reference to the item. Polygon'
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                items:
+                  items:
+                    type: number
+                  minItems: 2
+                  type: array
+                minItems: 4
+                type: array
+              type: array
+            type:
+              enum:
+                - Polygon
+              type: string
+          required:
+            - type
+            - coordinates
+          title: 'GeoJSON Polygon'
+          type: object
+        - description: 'Geoproperty. Geojson reference to the item. MultiPoint'
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                items:
+                  type: number
+                minItems: 2
+                type: array
+              type: array
+            type:
+              enum:
+                - MultiPoint
+              type: string
+          required:
+            - type
+            - coordinates
+          title: 'GeoJSON MultiPoint'
+          type: object
+        - description: 'Geoproperty. Geojson reference to the item. MultiLineString'
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                items:
+                  items:
+                    type: number
+                  minItems: 2
+                  type: array
+                minItems: 2
+                type: array
+              type: array
+            type:
+              enum:
+                - MultiLineString
+              type: string
+          required:
+            - type
+            - coordinates
+          title: 'GeoJSON MultiLineString'
+          type: object
+        - description: 'Geoproperty. Geojson reference to the item. MultiLineString'
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                items:
+                  items:
+                    items:
+                      type: number
+                    minItems: 2
+                    type: array
+                  minItems: 4
+                  type: array
+                type: array
+              type: array
+            type:
+              enum:
+                - MultiPolygon
+              type: string
+          required:
+            - type
+            - coordinates
+          title: 'GeoJSON MultiPolygon'
+          type: object
+      x-ngsi:
+        type: Geoproperty
+  required:
+    - id
+    - type
+    - location
+  type: object
+  x-derived-from: ""
+  x-model-tags: ""
+  x-version: 0.0.1
