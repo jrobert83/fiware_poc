@@ -21,6 +21,13 @@ StreetlightControlCabinetSPIE:
       type: string
       x-ngsi:
         type: Property
+    mIDLBE:
+      description: 'Internal ID'
+      minimum: 0
+      type: number
+      x-ngsi:
+        model: http://schema.org/Number
+        type: Property
     mID:
       description: 'Internal ID'
       minimum: 0
