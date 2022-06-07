@@ -1,0 +1,264 @@
+#SNAKE_CASE majuscule : Partie statique
+#camelCase : Partie Dynamique
+CTF_CRITER:
+  description: 'Contrôleurs de feux CRITER'
+  properties:
+    id:
+      anyOf: &streetlightcontrolcabinet_-_properties_-_owner_-_items_-_anyof
+        - description: 'Property. Identifier format of any NGSI entity'
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
+          type: string
+        - description: 'Property. Identifier format of any NGSI entity'
+          format: uri
+          type: string
+      description: 'Unique identifier of the entity'
+      x-ngsi:
+        type: Property
+    type:
+      description: 'NGSI Entity type. It has to be CTF_CRITER'
+      enum:
+        - CTF_CRITER
+      type: string
+      x-ngsi:
+        type: Property
+    #Partie STATIQUE
+    CTF_ID:
+      description: 'Internal ID'
+      minimum: 0
+      type: number
+      x-ngsi:
+        model: http://schema.org/Number
+        type: Property
+    MAT_NUM_MAINT:
+      description: 'Numero de maintenance de l equipement'
+      type: string
+      x-ngsi:
+        type: Property
+    MAT_LIB:
+      description: 'libelle court de l equipement'
+      type: string
+      x-ngsi:
+        type: Property
+    MAT_MARQUE:
+      description: 'Marque de l equipement'
+      type: string
+      x-ngsi:
+        type: Property
+    MAT_MODELE:
+      description: 'Modele de l equipement'
+      type: string
+      x-ngsi:
+        type: Property
+    MAT_ADR_IP:
+      description: 'Adresse IP de l equipement'
+      type: string
+      x-ngsi:
+        type: Property
+    EQP_TYPE_BOITIER:
+      description: 'Type de liaison de l equipement'
+      type: string
+      x-ngsi:
+        type: Property
+    EQP_PORT_SOCKET:
+      description: 'socket de communication avec l equipement'
+      type: string
+      x-ngsi:
+        type: Property
+    EQP_RACCORDE:
+      description: 'Equipement EQP_RACCORDE'
+      type: string
+      x-ngsi:
+        type: Property                
+    GEOLOC:
+      description: 'Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon'
+      oneOf:
+        - description: 'Geoproperty. Geojson reference to the item. Point'
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                type: number
+              minItems: 2
+              type: array
+            type:
+              enum:
+                - Point
+              type: string
+          required:
+            - type
+            - coordinates
+          title: 'GeoJSON Point'
+          type: object
+        - description: 'Geoproperty. Geojson reference to the item. LineString'
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                items:
+                  type: number
+                minItems: 2
+                type: array
+              minItems: 2
+              type: array
+            type:
+              enum:
+                - LineString
+              type: string
+          required:
+            - type
+            - coordinates
+          title: 'GeoJSON LineString'
+          type: object
+        - description: 'Geoproperty. Geojson reference to the item. Polygon'
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                items:
+                  items:
+                    type: number
+                  minItems: 2
+                  type: array
+                minItems: 4
+                type: array
+              type: array
+            type:
+              enum:
+                - Polygon
+              type: string
+          required:
+            - type
+            - coordinates
+          title: 'GeoJSON Polygon'
+          type: object
+        - description: 'Geoproperty. Geojson reference to the item. MultiPoint'
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                items:
+                  type: number
+                minItems: 2
+                type: array
+              type: array
+            type:
+              enum:
+                - MultiPoint
+              type: string
+          required:
+            - type
+            - coordinates
+          title: 'GeoJSON MultiPoint'
+          type: object
+        - description: 'Geoproperty. Geojson reference to the item. MultiLineString'
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                items:
+                  items:
+                    type: number
+                  minItems: 2
+                  type: array
+                minItems: 2
+                type: array
+              type: array
+            type:
+              enum:
+                - MultiLineString
+              type: string
+          required:
+            - type
+            - coordinates
+          title: 'GeoJSON MultiLineString'
+          type: object
+        - description: 'Geoproperty. Geojson reference to the item. MultiLineString'
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                items:
+                  items:
+                    items:
+                      type: number
+                    minItems: 2
+                    type: array
+                  minItems: 4
+                  type: array
+                type: array
+              type: array
+            type:
+              enum:
+                - MultiPolygon
+              type: string
+          required:
+            - type
+            - coordinates
+          title: 'GeoJSON MultiPolygon'
+          type: object
+      x-ngsi:
+        type: Geoproperty
+    #Partie Dynamique
+    mPresenceAlarme:
+      description: 'Niveau de presence d une alarme'
+      minimum: 0
+      type: number
+      x-ngsi:
+        model: http://schema.org/Number
+        type: Property
+    mVersionDossier:
+      description: 'Version de dossier carrefour'
+      type: string
+      x-ngsi:
+        type: Property
+    mNomFichierConfiguration:
+      description: 'Nom du fichier de configuration'
+      type: string
+      x-ngsi:
+        type: Property
+    propertiesVal[1]: 
+      description: 'Asservissement'
+      type: string
+      x-ngsi:
+        type: Property
+    propertiesVal[2]:
+      description: 'Fonctionnement VTC'
+      type: string
+      x-ngsi:
+        type: Property
+  required:
+    - id
+    - type
+    - CTF_ID
+    - MAT_NUM_MAINT
+    - GEOLOC
+  type: object
+  x-derived-from: ""
+  x-model-tags: ""
+  x-version: 0.0.1
